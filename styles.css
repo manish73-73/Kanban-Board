@@ -1,0 +1,479 @@
+body {
+    font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Base styles for all elements using relative units */
+:root {
+    --primary-color: #4b6cb7;
+    --dark-color: #182848;
+    --text-color: #1f2937;
+    --border-color: #e2e8f0;
+    --shadow-light: rgba(0, 0, 0, 0.05);
+    --shadow-medium: rgba(0, 0, 0, 0.15);
+    --shadow-heavy: rgba(0, 0, 0, 0.2);
+    --transition: 0.3s ease;
+}
+
+/* Navbar */
+.navbar {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 8px var(--shadow-medium);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-brand {
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    font-weight: 700;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.navbar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.navbar-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.navbar-menu li a {
+    text-decoration: none;
+    color: #333;
+    font-size: clamp(0.9rem, 1.2vw, 1rem);
+    font-weight: 500;
+    transition: color var(--transition), transform 0.2s ease;
+}
+
+.navbar-menu li a:hover {
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+/* Kanban App */
+#kanban-app {
+    max-width: clamp(90%, 1300px, 95%);
+    margin: clamp(1rem, 2vw, 2rem) auto;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 1rem;
+    box-shadow: 0 0.375rem 1.5625rem var(--shadow-heavy);
+    padding: clamp(1rem, 2vw, 1.5rem);
+    flex: 1;
+}
+
+#task-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: clamp(1rem, 2vw, 1.5rem);
+    padding: clamp(0.75rem, 1.5vw, 1.25rem);
+    background: #f8fafc;
+    border-radius: 0.625rem;
+    box-shadow: 0 0.125rem 0.75rem var(--shadow-light);
+}
+
+#task-title,
+#task-desc {
+    margin-bottom: 0.75rem;
+    padding: clamp(0.5rem, 1.5vw, 0.875rem);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    font-family: 'Raleway', sans-serif;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+#task-title:focus,
+#task-desc:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0.5rem rgba(75, 108, 183, 0.3);
+    outline: none;
+}
+
+button {
+    padding: clamp(0.5rem, 1.5vw, 0.875rem);
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    font-weight: 500;
+    font-family: 'Raleway', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    transition: background-color var(--transition), transform 0.2s ease, box-shadow var(--transition);
+}
+
+button:hover {
+    background-color: var(--dark-color);
+    transform: translateY(-0.1875rem);
+    box-shadow: 0 0.25rem 0.75rem var(--shadow-heavy);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.columns {
+    display: flex;
+    justify-content: space-between;
+    gap: clamp(0.75rem, 1.5vw, 1.5rem);
+    flex-wrap: wrap;
+}
+
+.column {
+    flex: 1;
+    min-width: clamp(280px, 30vw, 350px);
+    padding: clamp(0.75rem, 1.5vw, 1.25rem);
+    background-color: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 0.625rem;
+    min-height: clamp(300px, 50vh, 450px);
+    transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.column:hover {
+    box-shadow: 0 0.375rem 1.25rem var(--shadow-medium);
+    transform: translateY(-0.3125rem);
+}
+
+.column h2 {
+    text-align: center;
+    margin-bottom: clamp(0.75rem, 1.5vw, 1.25rem);
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--text-color);
+    font-weight: 600;
+    font-family: 'Raleway', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+}
+
+.task-list {
+    min-height: 100px;
+}
+
+.task-card {
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 0.625rem;
+    padding: clamp(0.5rem, 1.5vw, 0.9375rem);
+    margin-bottom: 0.9375rem;
+    cursor: move;
+    transition: transform var(--transition), opacity var(--transition), box-shadow var(--transition);
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* Glowing effects based on column */
+#todo .task-card {
+    box-shadow: 0 0 0.75rem rgba(255, 140, 0, 0.7); /* Orange glow for To Do */
+}
+
+#inprogress .task-card {
+    box-shadow: 0 0 0.75rem rgba(30, 144, 255, 0.7); /* Blue glow for In Progress */
+}
+
+#done .task-card {
+    box-shadow: 0 0 0.75rem rgba(34, 197, 94, 0.7); /* Green glow for Done */
+}
+
+.task-card:hover {
+    transform: translateY(-0.3125rem);
+    box-shadow: 0 0.5rem 1.25rem var(--shadow-heavy);
+}
+
+.task-card.dragging {
+    opacity: 0.7;
+    transform: scale(0.95);
+}
+
+.column.over {
+    background-color: #f1f5f9;
+    border-color: var(--primary-color);
+    transition: background-color var(--transition), border-color var(--transition);
+}
+
+/* Footer */
+.footer {
+    background: linear-gradient(135deg, var(--dark-color) 0%, var(--primary-color) 100%);
+    padding: clamp(1.5rem, 3vw, 2.5rem) 1rem;
+    text-align: center;
+    margin-top: clamp(1rem, 2vw, 2rem);
+    color: #ffffff;
+    border-top: 0.125rem solid var(--primary-color);
+    box-shadow: 0 -0.25rem 0.9375rem var(--shadow-medium);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-content h3 {
+    margin-bottom: clamp(0.75rem, 1.5vw, 1.25rem);
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    font-weight: 700;
+    font-family: 'Raleway', sans-serif;
+    color: #ffffff;
+}
+
+.footer-contact p {
+    margin: clamp(0.5rem, 1vw, 0.625rem) 0;
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    font-family: 'Raleway', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+}
+
+.footer-contact a {
+    color: #a3bffa;
+    text-decoration: none;
+    transition: color var(--transition), transform 0.2s ease;
+}
+
+.footer-contact a:hover {
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.footer-social {
+    margin: clamp(0.75rem, 1.5vw, 1.25rem) 0;
+    display: flex;
+    justify-content: center;
+    gap: clamp(0.75rem, 1.5vw, 1.25rem);
+}
+
+.footer-social a {
+    color: #ffffff;
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    transition: color var(--transition), transform 0.3s ease;
+}
+
+.footer-social a:hover {
+    color: #a3bffa;
+    transform: scale(1.2);
+}
+
+.footer-copyright {
+    margin-top: clamp(0.5rem, 1vw, 0.9375rem);
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+    font-family: 'Raleway', sans-serif;
+    color: #d1d5db;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(1.25rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+
+/* Large Desktop (>1200px) */
+@media (min-width: 1200px) {
+    #kanban-app {
+        max-width: 1300px;
+        padding: 2rem;
+    }
+
+    .columns {
+        flex-wrap: nowrap;
+        gap: 2rem;
+    }
+
+    .column {
+        min-width: clamp(300px, 30vw, 350px);
+        min-height: 500px;
+    }
+}
+
+/* Tablet (769px–1200px) */
+@media (max-width: 1200px) and (min-width: 769px) {
+    #kanban-app {
+        max-width: 95%;
+        margin: 1.5rem;
+        padding: 1.25rem;
+    }
+
+    .columns {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .column {
+        min-width: clamp(250px, 30vw, 280px);
+        min-height: 400px;
+    }
+
+    .navbar {
+        padding: 1rem 1.5rem;
+    }
+
+    .navbar-menu {
+        gap: 1rem;
+    }
+}
+
+/* Mobile (481px–768px) */
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+    }
+
+    .navbar-toggle {
+        display: block;
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+    }
+
+    .navbar-menu {
+        display: none;
+        flex-direction: column;
+        gap: 0.75rem;
+        width: 100%;
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    .navbar-menu.active {
+        display: flex;
+    }
+
+    #kanban-app {
+        max-width: 100%;
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 0.5rem;
+    }
+
+    .columns {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .column {
+        min-width: 100%;
+        min-height: 250px;
+        padding: 1rem;
+    }
+
+    .column h2 {
+        font-size: clamp(0.875rem, 2vw, 1.125rem);
+    }
+
+    #task-form {
+        padding: 1rem;
+    }
+
+    #task-title,
+    #task-desc {
+        font-size: 0.9375rem;
+        padding: 0.75rem;
+    }
+
+    button {
+        font-size: 0.9375rem;
+        padding: 0.75rem;
+    }
+
+    .footer {
+        padding: 1.5rem 0.5rem;
+    }
+
+    .footer-content {
+        padding: 0 1rem;
+    }
+}
+
+/* Small Mobile (≤480px) */
+@media (max-width: 480px) {
+    .navbar-brand {
+        font-size: clamp(1rem, 2.5vw, 1.25rem);
+    }
+
+    .navbar-toggle {
+        font-size: 1.25rem;
+    }
+
+    .navbar-menu li a {
+        font-size: clamp(0.75rem, 2vw, 0.875rem);
+    }
+
+    #kanban-app {
+        margin: 0.5rem;
+        padding: 0.75rem;
+    }
+
+    .column {
+        padding: 0.75rem;
+    }
+
+    .column h2 {
+        font-size: clamp(0.875rem, 2vw, 1rem);
+        gap: 0.5rem;
+    }
+
+    .task-card {
+        padding: 0.75rem;
+        font-size: clamp(0.75rem, 1.8vw, 0.875rem);
+    }
+
+    .footer-content h3 {
+        font-size: clamp(1rem, 2.5vw, 1.125rem);
+    }
+
+    .footer-contact p {
+        font-size: clamp(0.75rem, 1.8vw, 0.875rem);
+        flex-direction: column;
+        gap: 0.25rem;
+        text-align: center;
+    }
+
+    .footer-social a {
+        font-size: clamp(1rem, 2.5vw, 1.125rem);
+    }
+}

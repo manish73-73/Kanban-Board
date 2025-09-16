@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Kanban Board</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <i class="fas fa-tasks"></i> Kanban Board
+        </div>
+        <button class="navbar-toggle" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="navbar-menu">
+        </ul>
+    </nav>
+
+    <!-- Kanban App -->
+    <div id="kanban-app">
+        <form id="task-form">
+            <input type="text" id="task-title" placeholder="Task Title" required>
+            <textarea id="task-desc" placeholder="Task Description"></textarea>
+            <button type="submit"><i class="fas fa-plus"></i> Add Task</button>
+        </form>
+        <div class="columns">
+            <div class="column" id="todo" data-status="todo">
+                <h2><i class="fas fa-list"></i> To Do</h2>
+                <div class="task-list"></div>
+            </div>
+            <div class="column" id="inprogress" data-status="inprogress">
+                <h2><i class="fas fa-spinner"></i> In Progress</h2>
+                <div class="task-list"></div>
+            </div>
+            <div class="column" id="done" data-status="done">
+                <h2><i class="fas fa-check-circle"></i> Done</h2>
+                <div class="task-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>Contact Me</h3>
+            <div class="footer-contact">
+                <p><i class="fas fa-envelope"></i> Email: <a href="mailto:manishprasad27330@gmail.com">manishprasad27330@gmail.com</a></p>
+                <p><i class="fas fa-phone"></i> Phone: +91-8959127330</p>
+            </div>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/manish047/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/manish73-73" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+            <p class="footer-copyright">&copy; 2025 Manish Prasad. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="app.js"></script>
+    <script>
+        // Navbar toggle for mobile
+        document.querySelector('.navbar-toggle').addEventListener('click', () => {
+            document.querySelector('.navbar-menu').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
